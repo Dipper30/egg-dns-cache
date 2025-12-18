@@ -1,0 +1,54 @@
+{
+  "name": "egg-dnscache",
+  "version": "1.0.0",
+  "description": "Egg.js plugin: enable DNS Cache for http request and fetch",
+  "eggPlugin": {
+    "name": "dnscache"
+  },
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin",
+    "dnscache",
+    "dns",
+    "cache",
+    "httpclient",
+    "fetch"
+  ],
+  "main": "app.js",
+  "files": [
+    "app.js",
+    "lib",
+    "config"
+  ],
+  "scripts": {
+    "test": "npm run lint && egg-bin test",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "autod": "autod"
+  },
+  "dependencies": {
+    "dnscache": "^1.0.2"
+  },
+  "devDependencies": {
+    "egg": "^3.0.0",
+    "egg-bin": "^6.0.0",
+    "egg-mock": "^5.15.2",
+    "eslint": "^8.0.0",
+    "eslint-config-egg": "^12.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dipper30/egg-dnscache.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dipper30/egg-dnscache/issues"
+  },
+  "homepage": "https://github.com/Dipper30/egg-dnscache#readme",
+  "author": "",
+  "license": "MIT"
+}
