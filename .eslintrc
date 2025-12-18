@@ -1,0 +1,7 @@
+{
+  "extends": "eslint-config-egg",
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}
