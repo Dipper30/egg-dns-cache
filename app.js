@@ -12,6 +12,7 @@ module.exports = app => {
       app.coreLogger.info('[egg-dnscache] Initializing DNS cache...');
 
       // Initialize DNS cache with configuration
+      // The dnscache module patches Node.js dns.lookup globally
       dnscache({
         enable: true,
         ttl: config.ttl || 300, // Default 5 minutes
@@ -19,35 +20,37 @@ module.exports = app => {
       });
 
       // Hijack app.httpclient
+      // Note: DNS caching is applied globally via dnscache module
+      // The hijacking ensures the plugin is aware of httpclient usage
       if (app.httpclient) {
         const originalRequest = app.httpclient.request.bind(app.httpclient);
         app.httpclient.request = function(...args) {
-          // DNS cache is already applied globally via dnscache module
           return originalRequest(...args);
         };
         app.coreLogger.info('[egg-dnscache] app.httpclient hijacked successfully');
       }
 
       // Hijack app.fetch (if available)
+      // Note: DNS caching is applied globally via dnscache module
+      // The hijacking ensures the plugin is aware of fetch usage
       if (app.fetch) {
         const originalFetch = app.fetch.bind(app);
         app.fetch = function(...args) {
-          // DNS cache is already applied globally via dnscache module
           return originalFetch(...args);
         };
         app.coreLogger.info('[egg-dnscache] app.fetch hijacked successfully');
       }
 
+      // Expose DNS cache instance for manual operations
+      app.dnsCache = new DNSCache({
+        ttl: (config.ttl || 300) * 1000, // Convert to milliseconds
+        cachesize: config.cachesize || 1000,
+      });
+
       app.coreLogger.info('[egg-dnscache] DNS cache initialized with ttl=%d, cachesize=%d',
         config.ttl || 300,
         config.cachesize || 1000
       );
-    });
-
-    // Expose DNS cache instance for manual operations if needed
-    app.dnsCache = new DNSCache({
-      ttl: (config.ttl || 300) * 1000, // Convert to milliseconds
-      cachesize: config.cachesize || 1000,
     });
   }
 };
