@@ -1,21 +1,22 @@
 'use strict';
 
 const dnscache = require('dnscache');
+const DNSCache = require('./lib/dns-cache');
 
 module.exports = app => {
   const config = app.config.dnscache;
-
-  // Initialize DNS cache with configuration
-  const dnsCache = dnscache({
-    enable: config.enable !== false,
-    ttl: config.ttl || 300, // Default 5 minutes
-    cachesize: config.cachesize || 1000,
-  });
 
   // Only hijack if enabled
   if (config.enable !== false) {
     app.beforeStart(async () => {
       app.coreLogger.info('[egg-dnscache] Initializing DNS cache...');
+
+      // Initialize DNS cache with configuration
+      dnscache({
+        enable: true,
+        ttl: config.ttl || 300, // Default 5 minutes
+        cachesize: config.cachesize || 1000,
+      });
 
       // Hijack app.httpclient
       if (app.httpclient) {
@@ -44,6 +45,9 @@ module.exports = app => {
     });
 
     // Expose DNS cache instance for manual operations if needed
-    app.dnsCache = dnsCache;
+    app.dnsCache = new DNSCache({
+      ttl: (config.ttl || 300) * 1000, // Convert to milliseconds
+      cachesize: config.cachesize || 1000,
+    });
   }
 };
