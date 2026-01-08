@@ -1,0 +1,56 @@
+{
+  "name": "egg-dns-cache",
+  "version": "0.0.1",
+  "description": "DNS cache plugin for egg",
+  "eggPlugin": {
+    "name": "dnsCache"
+  },
+  "files": [
+    "index.d.ts",
+    "app.js",
+    "agent.js",
+    "lib",
+    "config"
+  ],
+  "types": "./index.d.ts",
+  "keywords": [
+    "egg",
+    "egg-plugin",
+    "dns-cache"
+  ],
+  "dependencies": {
+    "urllib": "^4.9.0",
+    "urllib2": "npm:urllib@^2.33.0",
+    "undici": "^7.1.1",
+    "ylru": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.2",
+    "egg": "^3.30.1",
+    "egg-bin": "^6.13.0",
+    "egg-mock": "^5.15.1",
+    "eslint": "^8.57.0",
+    "eslint-config-egg": "^13.0.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">= 14.20.0"
+  },
+  "scripts": {
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test --ts false",
+    "cov": "egg-bin cov --ts false",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dipper30/egg-dns-cache.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dipper30/egg-dns-cache/issues"
+  },
+  "homepage": "https://github.com/Dipper30/egg-dns-cache#readme",
+  "author": "Dipper30",
+  "license": "MIT"
+}

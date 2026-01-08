@@ -1,0 +1,12 @@
+{
+  "extends": "eslint-config-egg",
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "array-bracket-spacing": ["off", "never"],
+    "semi": ["error", "always"]
+  },
+  "root": true
+}

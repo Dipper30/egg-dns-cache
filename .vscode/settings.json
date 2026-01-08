@@ -1,0 +1,15 @@
+{
+  "editor.defaultFormatter": "GitHub.copilot-chat",
+  "editor.formatOnSave": true,
+  "javascript.format.enable": true,
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
+}
